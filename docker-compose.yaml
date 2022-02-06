@@ -1,0 +1,20 @@
+version: '3'
+services:
+  gps-utils:
+    #    environment:
+    build:
+      context: ./gpsUtil
+      dockerfile: Dockerfile
+    ports:
+      - "8181:8181"
+    restart: always
+
+  tour-guide:
+    environment:
+      - CLIENT_GPS_BASE_URL=http://gps-utils:8181
+    build:
+      context: ./TourGuide
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
